@@ -1,0 +1,21 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "image-size": "^1.1.1",
+    "jsonwebtoken": "^9.0.2",
+    "puppeteer": "^22.9.0",
+    "sharp": "^0.33.4",
+    "spritesheet-js": "^1.2.8",
+    "svg-sprite": "^2.0.4",
+    "xml2js": "^0.6.2"
+  }
+}

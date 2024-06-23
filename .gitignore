@@ -1,0 +1,10 @@
+# Ignorar carpetas de salida y sprites
+/output
+/sprites
+
+# Ignorar archivos y carpetas específicos del entorno de desarrollo
+node_modules
+.DS_Store
+
+# Ignorar archivos de configuración del entorno
+.env
