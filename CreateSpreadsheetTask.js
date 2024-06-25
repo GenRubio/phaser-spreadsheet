@@ -1,4 +1,3 @@
-
 const sharp = require('sharp');
 const fs = require('fs');
 const path = require('path');
@@ -7,7 +6,7 @@ const xml2js = require('xml2js');
 const CreateSpreadsheetTask = {
     async run(animationPath, colors, width, height, flipDirection = null) {
         try {
-            originalAnimationPath = animationPath;
+            const originalAnimationPath = animationPath;
             animationPath = './sprites/' + originalAnimationPath;
             const files = await fs.promises.readdir(animationPath);
 
@@ -22,9 +21,11 @@ const CreateSpreadsheetTask = {
                 const inputPath = path.join(animationPath, file);
                 const data = await fs.promises.readFile(inputPath, 'utf-8');
                 const modifiedSvg = await this.modifySvgColors(data, colors);
-                let buffer = await sharp(Buffer.from(modifiedSvg)).png().toBuffer();
-                // Redimensionar la imagen si es necesario
-                buffer = await sharp(buffer).resize(width, height).toBuffer();
+                // Convertir SVG a PNG directamente con el tamaño deseado
+                let buffer = await sharp(Buffer.from(modifiedSvg))
+                    .resize(width, height, { fit: 'contain' })
+                    .png()
+                    .toBuffer();
                 // Voltear la imagen si se especifica
                 if (flipDirection) {
                     if (flipDirection === 'horizontal') {
@@ -44,7 +45,7 @@ const CreateSpreadsheetTask = {
             const outputPath = `./output/${originalAnimationPath}/${originalAnimationPath}.png`;
             console.log('Guardando imagen PNG en:', `./output/${originalAnimationPath}`);
             if (!fs.existsSync(`./output/${originalAnimationPath}`)) {
-                fs.mkdirSync(`./output/${originalAnimationPath}`);
+                fs.mkdirSync(`./output/${originalAnimationPath}`, { recursive: true });
             }
             await fs.promises.writeFile(outputPath, collageBuffer);
             console.log('Imagen PNG guardada en:', outputPath);
