@@ -16,6 +16,16 @@ const getFirstPngFile = (dirPath) => {
     return null;
 };
 
+const totalSvgFiles = (dirPath) => {
+    let totalSvgFiles = 0;
+    fs.readdirSync(dirPath).forEach(file => {
+        if (path.extname(file).toLowerCase() === '.svg') {
+            totalSvgFiles++;
+        }
+    });
+    return totalSvgFiles;
+}
+
 // Función principal para procesar las carpetas dentro de sprites
 const processFolders = async () => {
     const folders = fs.readdirSync(baseDir);
@@ -28,7 +38,7 @@ const processFolders = async () => {
                 console.log(`Carpeta: ${folder}`);
                 console.log(`Archivo: ${path.basename(firstPng)}`);
                 console.log(`Dimensiones: ${dimensions.width}x${dimensions.height}`);
-                console.log(`Frames: ${fs.readdirSync(folderPath).length}`);
+                console.log(`Frames: ${totalSvgFiles(folderPath)}`);
                 await CreateSpreadsheetTask.run(folder, colors, dimensions.width, dimensions.height);
                 console.log('---------------------');
             }
