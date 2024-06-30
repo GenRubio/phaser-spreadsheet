@@ -37,6 +37,3 @@ const processFolders = async () => {
 };
 
 processFolders();
-
-
-//await CreateSpreadsheetTask.run(colors, width, height)
