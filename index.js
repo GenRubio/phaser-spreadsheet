@@ -28,7 +28,9 @@ const processFolders = async () => {
                 console.log(`Carpeta: ${folder}`);
                 console.log(`Archivo: ${path.basename(firstPng)}`);
                 console.log(`Dimensiones: ${dimensions.width}x${dimensions.height}`);
+                console.log(`Frames: ${fs.readdirSync(folderPath).length}`);
                 await CreateSpreadsheetTask.run(folder, colors, dimensions.width, dimensions.height);
+                console.log('---------------------');
             }
         }
     }
